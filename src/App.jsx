@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import Scene from './components/Scene.jsx'
 import LoginModal from './components/LoginModal.jsx'
 
@@ -33,15 +34,17 @@ export default function App() {
         <h1>{user ? `Good evening, ${user.username}.` : 'One small planet, a lot of sky.'}</h1>
       </footer>
 
-      {open && (
-        <LoginModal
-          onClose={close}
-          onSuccess={(u) => {
-            setUser(u)
-            setOpen(false)
-          }}
-        />
-      )}
+      <AnimatePresence>
+        {open && (
+          <LoginModal
+            onClose={close}
+            onSuccess={(u) => {
+              setUser(u)
+              setOpen(false)
+            }}
+          />
+        )}
+      </AnimatePresence>
     </div>
   )
 }
